@@ -1,0 +1,43 @@
+{
+    "root": true,
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
+        "plugin:react-hooks/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": ["./tsconfig.json"]
+    },
+    "plugins": ["@typescript-eslint", "prettier", "react-hooks"],
+    "rules": {
+        "eqeqeq": 2,
+        "prettier/prettier": 2,
+        "max-len": [
+            "error",
+            {
+                "code": 120,
+                "ignoreComments": true,
+                "ignoreUrls": true,
+                "ignoreTemplateLiterals": true,
+                "ignoreStrings": true
+            }
+        ],
+        "linebreak-style": 0,
+        "no-debugger": 1,
+        "no-console": ["warn", { "allow": ["warn", "error"] }],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
+    },
+    "overrides": [
+        {
+            "files": ["*.tsx", "*.ts"],
+            "rules": {
+                "import/no-anonymous-default-export": "off",
+                "@typescript-eslint/explicit-function-return-type": ["error"]
+            }
+        }
+    ],
+    "ignorePatterns": [".eslintrc.cjs", "vite.config.ts"]
+}
