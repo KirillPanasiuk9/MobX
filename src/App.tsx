@@ -1,11 +1,11 @@
-import { JSX } from "react";
+import React, { JSX } from "react";
+import { router } from "./router";
+import { RouterProvider } from "react-router-dom";
 
-function App(): JSX.Element {
+export function App(): JSX.Element {
   return (
     <>
-      <div>Hello world</div>
+      <RouterProvider router={router} />
     </>
   );
 }
-
-export default App;
