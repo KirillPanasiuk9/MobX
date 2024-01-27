@@ -1,11 +1,13 @@
 import React, { JSX } from "react";
-import { router } from "./router";
-import { RouterProvider } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { NavBar } from "./components/Navbar/NavBar";
+import { AppStyledContainer } from "./App.styled";
 
 export function App(): JSX.Element {
   return (
-    <>
-      <RouterProvider router={router} />
-    </>
+    <AppStyledContainer>
+      <NavBar />
+      <Outlet />
+    </AppStyledContainer>
   );
 }

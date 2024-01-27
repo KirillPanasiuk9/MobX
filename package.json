@@ -13,6 +13,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@mui/icons-material": "^5.15.6",
     "@mui/material": "^5.15.6",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
