@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home } from "../pages/Home/ItemPage";
+import { Home } from "../pages/Home/Home";
 import { Cart } from "../pages/Cart/Cart";
 import { Catalog } from "../pages/Catalog/Catalog";
 import { Saved } from "../pages/Saved/Saved";
