@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, Button, Stack, Typography, useTheme } from "@mui/material";
 import { AttachMoney, DeliveryDining, MenuBook, SupportAgent } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+import { PATHS } from "../../router/paths";
 
 export const Home = (): JSX.Element => {
   const { palette } = useTheme();
@@ -32,9 +34,11 @@ export const Home = (): JSX.Element => {
           <Typography variant="body1">
             In our store you can find a book for every taste. A large assortment. Nice prices. Interesting stories.
           </Typography>
-          <Button variant="contained">
-            <Typography variant="body1">Start exploring</Typography>
-          </Button>
+          <Link to={PATHS.CATALOG}>
+            <Button variant="contained" sx={{ width: { xs: "100%", sm: "50%" } }}>
+              <Typography variant="body1">Start exploring</Typography>
+            </Button>
+          </Link>
         </Stack>
         <Box maxWidth="50%" sx={{ display: { xs: "none", sm: "block" }, margin: "0 auto" }}>
           <img src="src/assets/ReadingGirlImage.jpg" width="300px" height="300px" />
