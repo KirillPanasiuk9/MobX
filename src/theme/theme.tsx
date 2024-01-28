@@ -3,24 +3,16 @@ import { createTheme } from "@mui/material";
 const Colors = {
   common: {
     white: "#FFFFFF",
+    black: "#000",
   },
   primary: {
-    // main: "#1F2428",
-    // light: "#545658",
-    // dark: "#293036",
-    // contrastText: "#C8DE37",
-    main: "#FFFAF5",
-    light: "#FFFAF5",
-    dark: "#293036",
+    main: "#E16A00",
     contrastText: "#4D2900",
   },
-  secondary: {
-    // dark: "#E3EF9B",
-    // main: "#F3FBC5",
-    // light: "#FAFDE9",
-    dark: "#E3EF9B",
-    main: "#E16A00",
-    light: "#FAFDE9",
+  // secondary: {
+  // },
+  background: {
+    paper: "#FFFAF5",
   },
   error: {
     main: "#DE2F21",

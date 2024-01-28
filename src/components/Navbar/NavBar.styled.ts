@@ -1,9 +1,10 @@
-import { Container, Typography, styled, Button, Box } from "@mui/material";
+import { Container, Typography, styled, Box } from "@mui/material";
 
 export const ContainerStyled = styled(Container)(({ theme: { palette } }) => ({
   height: 80,
-  width: "100%",
+  maxWidth: "100% !important",
   display: "flex",
+  margin: 0,
   justifyContent: "space-between",
   alignItems: "center",
   color: palette.primary.main,
@@ -24,11 +25,6 @@ export const LogoTextStyled = styled(Typography)(({ theme: { palette } }) => ({
   color: palette.primary.main,
 })) as typeof Typography;
 
-export const CartButtonStyled = styled(Button)(() => ({
-  display: "flex",
-  color: "white",
-})) as typeof Button;
-
 export const CartCountStyled = styled(Box)(({ theme: { palette } }) => ({
   width: 25,
   height: 25,
@@ -36,6 +32,6 @@ export const CartCountStyled = styled(Box)(({ theme: { palette } }) => ({
   color: "white",
   justifyContent: "center",
   alignItems: "center",
-  background: palette.secondary.main,
+  background: palette.primary.main,
   borderRadius: 9,
 })) as typeof Box;
