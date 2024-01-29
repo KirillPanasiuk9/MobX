@@ -1,73 +1,60 @@
 import React, { useState } from "react";
-import { Box, Button, Grid, Stack, Typography, IconButton } from "@mui/material";
-import {
-  CatalogListItemStyled,
-  CatalogListStyled,
-  ListItemImageStyled,
-  SearchBoxStyled,
-  SearchStyled,
-} from "./Catalog.styled";
-import { FavoriteBorder } from "@mui/icons-material";
+import { Box, Button, Pagination, Typography } from "@mui/material";
+import { CatalogListStyled, SearchBoxStyled, SearchStyled } from "./Catalog.styled";
+import { observer } from "mobx-react-lite";
+import catalogStore from "../../store/catalogStore";
+import { CatalogItem } from "./CatalogItem";
+import { RESULTS_PER_PAGE } from "../../constats";
+import { Loader } from "../../components/Loader/Loader";
 
-export const Catalog = (): JSX.Element => {
+export const Catalog = observer((): JSX.Element => {
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
 
-  const mockData = [
-    {
-      image: "Image",
-      price: 100,
-      title: "Title",
-      author: "Author",
-    },
-  ];
+  const handleSearch = (): void => {
+    setCurrentPage(1);
+    catalogStore.fetchCatalog(search, 0);
+  };
 
-  const handleSearch = (): void => {};
-  const handledItemClick = (): void => {};
+  const handlePageChange = (event: React.ChangeEvent<unknown>, page: number): void => {
+    const startIndex = page * RESULTS_PER_PAGE;
+    setCurrentPage(page);
+    catalogStore.fetchCatalog(search, startIndex);
+  };
 
   return (
     <Box>
-      <Typography variant="h3">Catalog</Typography>
+      <Typography variant="h3" mb={4}>
+        Catalog
+      </Typography>
       <SearchBoxStyled>
         <SearchStyled
+          sx={{ width: "75%" }}
           placeholder="Find the book you want"
           value={search}
           onChange={(event) => {
             setSearch(event.target.value);
           }}
+          onKeyDown={(event) => {
+            event.key === "Enter" && handleSearch();
+          }}
         />
-        <Button variant="contained" onClick={handleSearch}>
+        <Button variant="contained" onClick={handleSearch} sx={{ width: "20%" }}>
           Search
         </Button>
       </SearchBoxStyled>
-      <CatalogListStyled container rowSpacing={5} columnSpacing={{ xs: 10, sm: 2, md: 3 }}>
-        {mockData.map((item) => (
-          <Grid item xs={5} sm={4} md={3} key={item.title}>
-            <CatalogListItemStyled>
-              <ListItemImageStyled onClick={handledItemClick}>{item.image}</ListItemImageStyled>
-              <Typography variant="body1" fontWeight={700}>
-                {item.price} $
-              </Typography>
-              <Stack>
-                <Typography variant="body2" fontWeight={700}>
-                  {item.title}
-                </Typography>
-                <Typography variant="caption">{item.author}</Typography>
-              </Stack>
-              <Box display="flex" sx={{ justifyContent: "space-between" }}>
-                <Button
-                  variant="contained"
-                  sx={{ padding: "6px", width: "70%", fontWeight: 700, textTransform: "none" }}
-                >
-                  Add to cart
-                </Button>
-                <IconButton color="primary">
-                  <FavoriteBorder />
-                </IconButton>
-              </Box>
-            </CatalogListItemStyled>
-          </Grid>
-        ))}
-      </CatalogListStyled>
+      {catalogStore.isLoading ? (
+        <Loader mt="50px" />
+      ) : (
+        <CatalogListStyled container rowSpacing={5} columnSpacing={{ xs: 10, sm: 2, md: 3 }}>
+          {catalogStore.catalogItems.map((item) => (
+            <CatalogItem item={item} key={item.id} />
+          ))}
+        </CatalogListStyled>
+      )}
+      {catalogStore?.catalogItems?.length !== 0 && !catalogStore.isLoading && (
+        <Pagination count={catalogStore.totalPages} onChange={handlePageChange} page={currentPage} size="large" />
+      )}
     </Box>
   );
-};
+});
