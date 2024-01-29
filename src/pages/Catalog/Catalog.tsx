@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Pagination, Typography } from "@mui/material";
 import { CatalogListStyled, SearchBoxStyled, SearchStyled } from "./Catalog.styled";
 import { observer } from "mobx-react-lite";
@@ -6,8 +6,10 @@ import catalogStore from "../../store/catalogStore";
 import { CatalogItem } from "./CatalogItem";
 import { RESULTS_PER_PAGE } from "../../constats";
 import { Loader } from "../../components/Loader/Loader";
+import { useErrorHandling } from "../../errorHandling";
 
 export const Catalog = observer((): JSX.Element => {
+  const { setError } = useErrorHandling();
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -21,6 +23,11 @@ export const Catalog = observer((): JSX.Element => {
     setCurrentPage(page);
     catalogStore.fetchCatalog(search, startIndex);
   };
+
+  useEffect(() => {
+    catalogStore.isError ? setError("Some error happened") : setError(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [catalogStore.isError]);
 
   return (
     <Box>
