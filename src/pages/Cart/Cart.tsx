@@ -6,6 +6,7 @@ import { EmptyCartIcon } from "../../assets/EmptyCart";
 import { CartItem } from "./CartItem";
 import { Link } from "react-router-dom";
 import { PATHS } from "../../router/paths";
+import { MOCK_PRICE } from "../../constats";
 
 export const Cart = observer((): JSX.Element => {
   const { palette } = useTheme();
@@ -35,8 +36,8 @@ export const Cart = observer((): JSX.Element => {
               border={`3px solid ${palette.primary.main}`}
               borderRadius={2}
             >
-              <Typography>You have 1 books for order</Typography>
-              <Typography>Total price: 100$</Typography>
+              <Typography>You have {cartStore.itemsInCart.length} books for order</Typography>
+              <Typography>Total price: {cartStore.itemsInCart.length * MOCK_PRICE} $</Typography>
               <Button variant="contained" fullWidth>
                 Submit my order
               </Button>

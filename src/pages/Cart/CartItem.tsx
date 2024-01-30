@@ -1,10 +1,10 @@
 import React from "react";
 import { CartItemStyled } from "./Cart.styled";
 import { ItemType } from "../../store/catalogStore";
-import { Grid, Typography, Box, IconButton, Stack, Button } from "@mui/material";
-import { Remove, Add } from "@mui/icons-material";
+import { Grid, Typography, Box, Stack, Button } from "@mui/material";
 import cartStore from "../../store/cartStore";
 import { observer } from "mobx-react-lite";
+import { MOCK_PRICE } from "../../constats";
 
 export const CartItem = observer(({ item }: { item: ItemType }): JSX.Element => {
   const handledItemClick = (): void => {};
@@ -32,16 +32,7 @@ export const CartItem = observer(({ item }: { item: ItemType }): JSX.Element => 
           alignItems="center"
           sx={{ flexDirection: { xs: "row", md: "column" } }}
         >
-          <Box display="flex" alignItems="center">
-            <IconButton>
-              <Remove />
-            </IconButton>
-            <Typography marginX={1}>1</Typography>
-            <IconButton>
-              <Add />
-            </IconButton>
-          </Box>
-          <Typography>100$</Typography>
+          <Typography>{MOCK_PRICE} $</Typography>
           <Button variant="contained" onClick={handleDeleteFromCart}>
             Delete
           </Button>
