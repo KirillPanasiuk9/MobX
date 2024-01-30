@@ -7,20 +7,10 @@ import { Menu as MenuIcon } from "@mui/icons-material";
 import { PATHS } from "../../router/paths";
 import { Link } from "react-router-dom";
 import { CartButton } from "./CartButton";
+import { MENU_PAGES } from "../../constats";
 
-export function NavBar(): JSX.Element {
+export const NavBar = (): JSX.Element => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-
-  const pages = [
-    {
-      title: "Catalog",
-      linkTo: PATHS.CATALOG,
-    },
-    {
-      title: "Saved",
-      linkTo: PATHS.SAVED,
-    },
-  ];
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorElNav(event.currentTarget);
@@ -52,7 +42,7 @@ export function NavBar(): JSX.Element {
             onClose={handleCloseNavMenu}
             sx={{ display: { xs: "block", sm: "none" } }}
           >
-            {pages.map((page) => (
+            {MENU_PAGES.map((page) => (
               <MenuItem key={page.title} onClick={handleCloseNavMenu}>
                 <Link to={page.linkTo}>{page.title}</Link>
               </MenuItem>
@@ -72,7 +62,7 @@ export function NavBar(): JSX.Element {
         </Link>
 
         <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 4 }}>
-          {pages.map((page) => (
+          {MENU_PAGES.map((page) => (
             <Button
               key={page.title}
               onClick={handleCloseNavMenu}
@@ -91,4 +81,4 @@ export function NavBar(): JSX.Element {
       </ContainerStyled>
     </AppBar>
   );
-}
+};

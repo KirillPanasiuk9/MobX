@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { API_KEY, NO_IMAGE, RESULTS_PER_PAGE } from "../constats";
 
-export type CatalogItemType = {
+export type ItemType = {
   id: string;
   image: string;
   title: string;
@@ -11,7 +11,7 @@ export type CatalogItemType = {
 };
 
 class CatalogStore {
-  catalogItems: CatalogItemType[] = [];
+  catalogItems: ItemType[] = [];
   totalPages: number = 0;
   isLoading: boolean = false;
   isError: boolean = false;
