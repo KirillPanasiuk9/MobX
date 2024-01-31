@@ -28,6 +28,10 @@ class CartStore {
   get itemInCartCount(): number {
     return this.itemsInCart.length;
   }
+
+  isItemInCart(id: string): boolean {
+    return this.itemsInCart.map((el) => el.id).includes(id);
+  }
 }
 
 export default new CartStore();

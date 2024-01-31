@@ -1,30 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { CatalogListItemStyled, ListItemImageStyled, StyledText } from "./Catalog.styled";
-import { Box, Button, Grid, IconButton, Stack, Typography } from "@mui/material";
-import { FavoriteBorder } from "@mui/icons-material";
+import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { ItemType } from "../../store/catalogStore";
 import { MOCK_PRICE } from "../../constats";
 import { observer } from "mobx-react-lite";
 import cartStore from "../../store/cartStore";
+import savedStore from "../../store/savedStore";
+import { DeleteFromCartButton } from "../../components/Buttons/DeleteFromCartButton";
+import { AddToCartButton } from "../../components/Buttons/AddToCartButton";
 
 export const CatalogItem = observer(({ item }: { item: ItemType }): JSX.Element => {
-  const [isItemInCart, setIsItemInCart] = useState(false);
-
-  useEffect(() => {
-    cartStore.itemsInCart.map((el) => el.id).includes(item.id) && setIsItemInCart(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const handledItemClick = (): void => {};
 
   const handleAddToCart = (): void => {
     cartStore.addToCart(item);
-    setIsItemInCart(true);
   };
 
   const handleDeleteFromCart = (): void => {
     cartStore.deleteFromCart(item.id);
-    setIsItemInCart(false);
+  };
+
+  const handleAddToSaved = (): void => {
+    savedStore.addToSaved(item);
+  };
+
+  const handleDeleteFromSaved = (): void => {
+    savedStore.deleteFromSaved(item.id);
   };
 
   return (
@@ -41,26 +43,20 @@ export const CatalogItem = observer(({ item }: { item: ItemType }): JSX.Element 
           <StyledText variant="caption">{item.author}</StyledText>
         </Stack>
         <Box display="flex" sx={{ justifyContent: "space-between" }}>
-          {isItemInCart ? (
-            <Button
-              variant="contained"
-              sx={{ padding: "6px", width: "70%", fontWeight: 700, textTransform: "none" }}
-              onClick={handleDeleteFromCart}
-            >
-              In cart
-            </Button>
+          {cartStore.isItemInCart(item.id) ? (
+            <DeleteFromCartButton onClick={handleDeleteFromCart} />
           ) : (
-            <Button
-              variant="outlined"
-              sx={{ padding: "6px", width: "70%", fontWeight: 700, textTransform: "none" }}
-              onClick={handleAddToCart}
-            >
-              Add to cart
-            </Button>
+            <AddToCartButton onClick={handleAddToCart} />
           )}
-          <IconButton color="primary">
-            <FavoriteBorder />
-          </IconButton>
+          {savedStore.isItemSaved(item.id) ? (
+            <IconButton color="primary" onClick={handleDeleteFromSaved}>
+              <Favorite />
+            </IconButton>
+          ) : (
+            <IconButton color="primary" onClick={handleAddToSaved}>
+              <FavoriteBorder />
+            </IconButton>
+          )}
         </Box>
       </CatalogListItemStyled>
     </Grid>
