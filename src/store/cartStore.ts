@@ -4,7 +4,6 @@ import { CART_ITEMS_KEY } from "../constats";
 
 class CartStore {
   itemsInCart: ItemType[] = [];
-  itemInCartCount: number = this.itemsInCart.length;
 
   constructor() {
     makeAutoObservable(this);
@@ -26,10 +25,8 @@ class CartStore {
     localStorage.setItem(CART_ITEMS_KEY, JSON.stringify(this.itemsInCart));
   }
 
-  getItemInCartCount(): number {
-    const itemsFromStorage = localStorage.getItem(CART_ITEMS_KEY);
-    const items = itemsFromStorage ? JSON.parse(itemsFromStorage) : [];
-    return items.length;
+  get itemInCartCount(): number {
+    return this.itemsInCart.length;
   }
 }
 

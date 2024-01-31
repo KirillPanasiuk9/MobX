@@ -7,6 +7,7 @@ import { CatalogItem } from "./CatalogItem";
 import { RESULTS_PER_PAGE } from "../../constats";
 import { Loader } from "../../components/Loader/Loader";
 import { useErrorHandling } from "../../errorHandling";
+import cartStore from "../../store/cartStore";
 
 export const Catalog = observer((): JSX.Element => {
   const { setError } = useErrorHandling();
@@ -28,6 +29,10 @@ export const Catalog = observer((): JSX.Element => {
     catalogStore.isError ? setError("Some error happened") : setError(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [catalogStore.isError]);
+
+  useEffect(() => {
+    cartStore.initCart();
+  }, []);
 
   return (
     <Box>
