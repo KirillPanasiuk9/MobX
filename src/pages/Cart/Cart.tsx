@@ -2,11 +2,9 @@ import React, { useEffect } from "react";
 import { Typography, Box, Grid, Button, Stack, useTheme } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import cartStore from "../../store/cartStore";
-import { EmptyCartIcon } from "../../assets/EmptyCart";
 import { CartItem } from "./CartItem";
-import { Link } from "react-router-dom";
-import { PATHS } from "../../router/paths";
 import { MOCK_PRICE } from "../../constats";
+import { EmptySavedOrCart } from "../../components/EmptySavedOrCart/EmptySavedOrCart";
 
 export const Cart = observer((): JSX.Element => {
   const { palette } = useTheme();
@@ -45,21 +43,7 @@ export const Cart = observer((): JSX.Element => {
           </Grid>
         </Grid>
       ) : (
-        <Stack
-          width="100%"
-          alignItems="center"
-          justifyContent="center"
-          display="flex"
-          gap={2}
-          sx={{ "& .MuiSvgIcon-root": { fontSize: "200px" } }}
-        >
-          <EmptyCartIcon />
-          <Link to={`/${PATHS.CATALOG}`}>
-            <Button variant="contained" size="large">
-              Go shopping
-            </Button>
-          </Link>
-        </Stack>
+        <EmptySavedOrCart />
       )}
     </Box>
   );

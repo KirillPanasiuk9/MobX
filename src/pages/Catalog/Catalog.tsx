@@ -8,6 +8,7 @@ import { RESULTS_PER_PAGE } from "../../constats";
 import { Loader } from "../../components/Loader/Loader";
 import { useErrorHandling } from "../../errorHandling";
 import cartStore from "../../store/cartStore";
+import savedStore from "../../store/savedStore";
 
 export const Catalog = observer((): JSX.Element => {
   const { setError } = useErrorHandling();
@@ -32,6 +33,7 @@ export const Catalog = observer((): JSX.Element => {
 
   useEffect(() => {
     cartStore.initCart();
+    savedStore.initSaved();
   }, []);
 
   return (
