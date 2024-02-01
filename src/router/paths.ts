@@ -3,4 +3,5 @@ export enum PATHS {
   CATALOG = "catalog",
   SAVED = "saved",
   CART = "cart",
+  ITEM = "item",
 }

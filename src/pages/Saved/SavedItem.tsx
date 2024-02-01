@@ -9,9 +9,15 @@ import { ItemType } from "../../store/catalogStore";
 import { Favorite } from "@mui/icons-material";
 import { DeleteFromCartButton } from "../../components/Buttons/DeleteFromCartButton";
 import { AddToCartButton } from "../../components/Buttons/AddToCartButton";
+import { useNavigate } from "react-router-dom";
+import { PATHS } from "../../router/paths";
 
 export const SavedItem = observer(({ item }: { item: ItemType }): JSX.Element => {
-  const handledItemClick = (): void => {};
+  const navigate = useNavigate();
+  const handledItemClick = (): void => {
+    const itemId = item.id;
+    navigate(`/${PATHS.ITEM}/${itemId}`);
+  };
 
   const handleAddToCart = (): void => {
     cartStore.addToCart(item);

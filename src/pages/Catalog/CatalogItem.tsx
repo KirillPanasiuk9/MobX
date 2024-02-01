@@ -5,13 +5,19 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { ItemType } from "../../store/catalogStore";
 import { MOCK_PRICE } from "../../constats";
 import { observer } from "mobx-react-lite";
+import { useNavigate } from "react-router-dom";
 import cartStore from "../../store/cartStore";
 import savedStore from "../../store/savedStore";
 import { DeleteFromCartButton } from "../../components/Buttons/DeleteFromCartButton";
 import { AddToCartButton } from "../../components/Buttons/AddToCartButton";
+import { PATHS } from "../../router/paths";
 
 export const CatalogItem = observer(({ item }: { item: ItemType }): JSX.Element => {
-  const handledItemClick = (): void => {};
+  const navigate = useNavigate();
+  const handledItemClick = (): void => {
+    const itemId = item.id;
+    navigate(`/${PATHS.ITEM}/${itemId}`);
+  };
 
   const handleAddToCart = (): void => {
     cartStore.addToCart(item);

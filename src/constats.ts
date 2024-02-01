@@ -11,7 +11,6 @@ export const MENU_PAGES = [
   },
 ];
 export const MOCK_PRICE = 100;
-export const API_KEY = "AIzaSyDTQWN8aj5rJ0LgM3h-5nRh7y11EEA-L3I";
 export const RESULTS_PER_PAGE = 8;
 
 export const NO_IMAGE =
