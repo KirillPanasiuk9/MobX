@@ -5,9 +5,15 @@ import { Grid, Typography, Box, Stack, Button } from "@mui/material";
 import cartStore from "../../store/cartStore";
 import { observer } from "mobx-react-lite";
 import { MOCK_PRICE } from "../../constats";
+import { useNavigate } from "react-router-dom";
+import { PATHS } from "../../router/paths";
 
 export const CartItem = observer(({ item }: { item: ItemType }): JSX.Element => {
-  const handledItemClick = (): void => {};
+  const navigate = useNavigate();
+  const handledItemClick = (): void => {
+    const itemId = item.id;
+    navigate(`/${PATHS.ITEM}/${itemId}`);
+  };
 
   const handleDeleteFromCart = (): void => {
     cartStore.deleteFromCart(item.id);

@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { API_KEY, NO_IMAGE, RESULTS_PER_PAGE } from "../constats";
+import { NO_IMAGE, RESULTS_PER_PAGE } from "../constats";
 
 export type ItemType = {
   id: string;
@@ -25,7 +25,7 @@ class CatalogStore {
     this.isError = false;
 
     fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${search}&key=${API_KEY}&maxResults=${RESULTS_PER_PAGE}&startIndex=${startIndex}`,
+      `https://www.googleapis.com/books/v1/volumes?q=${search}&maxResults=${RESULTS_PER_PAGE}&startIndex=${startIndex}`,
     )
       .then((response) => response.json())
       .then((json) => {
@@ -45,12 +45,11 @@ class CatalogStore {
         });
         this.catalogItems = [...transformedList];
         this.totalPages = Math.ceil(totalItems / RESULTS_PER_PAGE);
-        this.isLoading = false;
       })
       .catch(() => {
-        this.isLoading = false;
         this.isError = true;
-      });
+      })
+      .finally(() => (this.isLoading = false));
   }
 }
 
