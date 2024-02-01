@@ -32,6 +32,11 @@ class CartStore {
   isItemInCart(id: string): boolean {
     return this.itemsInCart.map((el) => el.id).includes(id);
   }
+
+  clearCart(): void {
+    this.itemsInCart = [];
+    localStorage.setItem(CART_ITEMS_KEY, "");
+  }
 }
 
 export default new CartStore();
