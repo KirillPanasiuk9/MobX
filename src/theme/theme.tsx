@@ -9,8 +9,6 @@ const Colors = {
     main: "#E16A00",
     contrastText: "#4D2900",
   },
-  // secondary: {
-  // },
   background: {
     paper: "#FFFAF5",
   },
@@ -33,9 +31,6 @@ const Colors = {
     50: "#F1F1F1",
     A100: "#FBFBFB",
   },
-  // action: {
-  //   hover: "#ADC220",
-  // },
 };
 
 export const theme = createTheme({
