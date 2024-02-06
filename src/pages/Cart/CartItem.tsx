@@ -1,8 +1,7 @@
 import React from "react";
 import { CartItemStyled } from "./Cart.styled";
-import { ItemType } from "../../store/catalogStore";
+import { ItemType, cartStore } from "../../store";
 import { Grid, Typography, Box, Stack, Button } from "@mui/material";
-import cartStore from "../../store/cartStore";
 import { observer } from "mobx-react-lite";
 import { MOCK_PRICE } from "../../constats";
 import { useNavigate } from "react-router-dom";
@@ -21,16 +20,16 @@ export const CartItem = observer(({ item }: { item: ItemType }): JSX.Element => 
 
   return (
     <CartItemStyled container spacing={2} direction="row" maxHeight="fit-content">
-      <Grid item xs={5} md={4} padding="0px !important" maxHeight="200px">
-        <Box onClick={handledItemClick} component="img" src={item.image} />
+      <Grid item xs={5} md={4} maxHeight="200px">
+        <Box onClick={handledItemClick} component="img" src={item.image} sx={{ cursor: "pointer" }} />
       </Grid>
-      <Grid item xs={7} md={6} padding="0px !important">
+      <Grid item xs={7} md={6}>
         <Typography variant="h4" mb="50px">
           {item.title}
         </Typography>
         <Typography variant="h6">Author: {item.author}</Typography>
       </Grid>
-      <Grid xs={12} md={2} padding="0px !important">
+      <Grid item xs={12} md={2}>
         <Stack
           justifyContent="space-between"
           width="100%"

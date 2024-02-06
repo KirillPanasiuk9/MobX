@@ -1,17 +1,14 @@
 import React, { useEffect } from "react";
 import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
-import itemSore from "../../store/itemSore";
 import { useParams } from "react-router-dom";
 import { useErrorHandling } from "../../errorHandling";
 import { Loader } from "../../components/Loader/Loader";
-import catalogStore, { ItemType } from "../../store/catalogStore";
 import { MOCK_PRICE } from "../../constats";
-import cartStore from "../../store/cartStore";
 import { DeleteFromCartButton } from "../../components/Buttons/DeleteFromCartButton";
 import { AddToCartButton } from "../../components/Buttons/AddToCartButton";
-import savedStore from "../../store/savedStore";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { cartStore, catalogStore, itemSore, ItemType, savedStore } from "../../store";
 
 export const ItemPage = observer((): JSX.Element => {
   const { id = "" } = useParams();

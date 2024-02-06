@@ -1,23 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Pagination, Typography } from "@mui/material";
-import { CatalogListStyled, SearchBoxStyled, SearchStyled } from "./Catalog.styled";
+import { Box, Button, Pagination, Typography, TextField } from "@mui/material";
+import { CatalogListStyled, SearchBoxStyled, shakeAnimation } from "./Catalog.styled";
 import { observer } from "mobx-react-lite";
-import catalogStore from "../../store/catalogStore";
+import { catalogStore, cartStore, savedStore } from "../../store";
 import { CatalogItem } from "./CatalogItem";
 import { RESULTS_PER_PAGE } from "../../constats";
 import { Loader } from "../../components/Loader/Loader";
 import { useErrorHandling } from "../../errorHandling";
-import cartStore from "../../store/cartStore";
-import savedStore from "../../store/savedStore";
 
 export const Catalog = observer((): JSX.Element => {
   const { setError } = useErrorHandling();
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
+  const [isSearchBlank, setIsSearchBlank] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setIsSearchBlank(false);
+    setSearch(event.target.value);
+  };
 
   const handleSearch = (): void => {
-    setCurrentPage(1);
-    catalogStore.fetchCatalog(search, 0);
+    if (search) {
+      setIsSearchBlank(false);
+      setCurrentPage(1);
+      catalogStore.fetchCatalog(search, 0);
+    } else {
+      setIsSearchBlank(true);
+      setTimeout(() => {
+        setIsSearchBlank(false);
+      }, 500);
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): void => {
+    setIsSearchBlank(false);
+    event.key === "Enter" && handleSearch();
   };
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, page: number): void => {
@@ -42,16 +59,19 @@ export const Catalog = observer((): JSX.Element => {
         Catalog
       </Typography>
       <SearchBoxStyled>
-        <SearchStyled
-          sx={{ width: "75%" }}
-          placeholder="Find the book you want"
+        <TextField
+          label={isSearchBlank ? "" : "Find the book you want"}
+          sx={{
+            width: "75%",
+            ...(isSearchBlank && {
+              "& .MuiOutlinedInput-notchedOutline": {
+                animation: `${shakeAnimation} 0.5s linear`,
+              },
+            }),
+          }}
           value={search}
-          onChange={(event) => {
-            setSearch(event.target.value);
-          }}
-          onKeyDown={(event) => {
-            event.key === "Enter" && handleSearch();
-          }}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
         />
         <Button variant="contained" onClick={handleSearch} sx={{ width: "20%" }}>
           Search

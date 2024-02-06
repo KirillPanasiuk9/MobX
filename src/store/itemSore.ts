@@ -18,8 +18,6 @@ class ItemSore {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${search}`)
       .then((response) => response.json())
       .then((json) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         const item = json.items[0];
         const { title, authors = [], imageLinks, categories = [], description } = item.volumeInfo;
         this.item = {
