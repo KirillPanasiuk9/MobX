@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Typography, Box, Grid, Button, Stack, useTheme, Alert, Snackbar } from "@mui/material";
 import { observer } from "mobx-react-lite";
-import cartStore from "../../store/cartStore";
+import { cartStore } from "../../store";
 import { CartItem } from "./CartItem";
 import { MOCK_PRICE } from "../../constats";
 import { EmptySavedOrCart } from "../../components/EmptySavedOrCart/EmptySavedOrCart";

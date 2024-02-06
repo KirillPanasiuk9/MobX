@@ -2,10 +2,10 @@ import React, { Dispatch } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { SubmitHandler, useForm } from "react-hook-form";
-import cartStore from "../../store/cartStore";
+import { cartStore } from "../../store";
 import { TextField } from "./TextField";
 
-type ModalType = {
+type ModalPropsType = {
   isOpen: boolean;
   handleClose: () => void;
   setSuccessAlertOpen: Dispatch<React.SetStateAction<boolean>>;
@@ -25,7 +25,7 @@ export type OrderFormType = {
   surname: string;
 };
 
-export const SubmitModal = observer((props: ModalType): JSX.Element => {
+export const SubmitModal = observer((props: ModalPropsType): JSX.Element => {
   const { isOpen, handleClose, setSuccessAlertOpen } = props;
 
   const { control, handleSubmit } = useForm<OrderFormType>({

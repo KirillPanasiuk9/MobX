@@ -52,6 +52,7 @@ export const Home = (): JSX.Element => {
       >
         {shopFeatures.map((feature) => (
           <Stack
+            key={feature.text}
             alignItems="center"
             justifyContent="center"
             sx={{ width: "160px", height: "160px", background: `${palette.primary.main}`, borderRadius: "50%" }}

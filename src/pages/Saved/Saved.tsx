@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography, Box, Grid } from "@mui/material";
-import savedStore from "../../store/savedStore";
+import { savedStore } from "../../store";
 import { EmptySavedOrCart } from "../../components/EmptySavedOrCart/EmptySavedOrCart";
 import { SavedItem } from "./SavedItem";
 import { observer } from "mobx-react-lite";

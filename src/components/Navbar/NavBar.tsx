@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import { PATHS } from "../../router/paths";
 import { Link } from "react-router-dom";
-import { CartButton } from "./CartButton";
+import { CartButton } from "../Buttons/CartButton";
 import { MENU_PAGES } from "../../constats";
 
 export const NavBar = (): JSX.Element => {
@@ -49,7 +49,6 @@ export const NavBar = (): JSX.Element => {
             ))}
           </Menu>
         </Box>
-
         <Link to={PATHS.HOME}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Box sx={{ mr: 1 }}>
@@ -60,7 +59,6 @@ export const NavBar = (): JSX.Element => {
             </LogoTextStyled>
           </Box>
         </Link>
-
         <Box sx={{ display: { xs: "none", sm: "flex" }, gap: 4 }}>
           {MENU_PAGES.map((page) => (
             <Button
@@ -76,7 +74,6 @@ export const NavBar = (): JSX.Element => {
             </Button>
           ))}
         </Box>
-
         <CartButton />
       </ContainerStyled>
     </AppBar>

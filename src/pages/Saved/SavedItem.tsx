@@ -2,10 +2,8 @@ import React from "react";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import { MOCK_PRICE } from "../../constats";
 import { CartItemStyled } from "../Cart/Cart.styled";
-import cartStore from "../../store/cartStore";
-import savedStore from "../../store/savedStore";
 import { observer } from "mobx-react-lite";
-import { ItemType } from "../../store/catalogStore";
+import { ItemType, cartStore, savedStore } from "../../store";
 import { Favorite } from "@mui/icons-material";
 import { DeleteFromCartButton } from "../../components/Buttons/DeleteFromCartButton";
 import { AddToCartButton } from "../../components/Buttons/AddToCartButton";
@@ -33,18 +31,18 @@ export const SavedItem = observer(({ item }: { item: ItemType }): JSX.Element =>
 
   return (
     <Grid item xs={12} md={6}>
-      <CartItemStyled container spacing={2} direction="row" maxHeight="fit-content">
-        <Grid item xs={5} md={4} padding="0px !important" maxHeight="200px">
+      <CartItemStyled container spacing={2} direction="row" height="300px">
+        <Grid item xs={5} md={4}>
           <Box onClick={handledItemClick} component="img" src={item.image} />
         </Grid>
-        <Grid item xs={7} md={5} padding="0px !important">
-          <Typography variant="h4" mb="50px">
+        <Grid item xs={7} md={5}>
+          <Typography variant="h5" mb="20px">
             {item.title}
           </Typography>
-          <Typography variant="h6">Author: {item.author}</Typography>
+          <Typography variant="body1">Author: {item.author}</Typography>
           <Typography>{MOCK_PRICE} $</Typography>
         </Grid>
-        <Grid item xs={12} md={3} padding="0px !important">
+        <Grid item xs={12} md={3}>
           <Stack
             justifyContent="space-between"
             width="100%"
@@ -59,7 +57,7 @@ export const SavedItem = observer(({ item }: { item: ItemType }): JSX.Element =>
               <AddToCartButton onClick={handleAddToCart} />
             )}
             <Button variant="contained" onClick={handleDeleteFromSaved}>
-              Delete from Saved
+              <Typography mr={1}>Delete</Typography>
               <Favorite />
             </Button>
           </Stack>

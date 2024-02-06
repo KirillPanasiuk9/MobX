@@ -1,14 +1,32 @@
-import { styled, TextField, Grid, Box, Typography } from "@mui/material";
+import { styled, Grid, Box, Typography, keyframes } from "@mui/material";
+
+export const shakeAnimation = keyframes`
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+  
+  0%, 100% {
+      border: 2px solid red;
+  }
+  `;
 
 export const SearchBoxStyled = styled(Box)(() => ({
   width: "100%",
   display: "flex",
   justifyContent: "space-between",
 })) as typeof Box;
-
-export const SearchStyled = styled(TextField)(() => ({
-  width: "80%",
-})) as typeof TextField;
 
 export const CatalogListStyled = styled(Grid)(() => ({
   margin: "20px 0px 40px",
@@ -27,6 +45,7 @@ export const CatalogListItemStyled = styled(Box)(({ theme: { palette } }) => ({
 
 export const ListItemImageStyled = styled(Box)(() => ({
   height: "60%",
+  cursor: "pointer",
 })) as typeof Box;
 
 export const StyledText = styled(Typography)(() => ({
